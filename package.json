@@ -19,6 +19,7 @@
   "homepage": "https://github.com/aseerkt/dev-connector#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "gravatar": "^1.8.1",
@@ -28,7 +29,6 @@
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
-    "dotenv": "^8.2.0",
     "nodemon": "^2.0.4"
   }
 }
