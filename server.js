@@ -3,6 +3,9 @@ const connectDB = require('./config/db');
 
 const app = express();
 
+// Load vars
+require('dotenv').config();
+
 // Connect Database
 connectDB();
 

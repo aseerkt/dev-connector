@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 
-if (process.env.NODE_ENV !== 'production') require('dotenv').config();
-
-// Bring in Mongo URI from .env
-const mongoURI = process.env.MONGO_LOCAL_URI;
-
 const connectDB = async () => {
   try {
-    await mongoose.connect(mongoURI, {
+    await mongoose.connect(process.env.MONGO_LOCAL_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
