@@ -68,7 +68,7 @@ router.post(
           id: user.id,
         },
       };
-      console.log(payload);
+      // console.log(payload);
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: '1h',
       });
