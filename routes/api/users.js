@@ -69,7 +69,7 @@ router.post(
         },
       };
       console.log(payload);
-      const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: '1h',
       });
       return res.json({ token });
