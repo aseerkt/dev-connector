@@ -1,4 +1,7 @@
+const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
+const Profile = require('../models/Profile');
+const router = require('../routes/api/profile');
 
 const connectDB = async () => {
   try {
