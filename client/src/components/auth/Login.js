@@ -18,12 +18,12 @@ function Login() {
 
   return (
     <>
-      <h1 class='large text-primary'>Sign In</h1>
-      <p class='lead'>
-        <i class='fas fa-user'></i> Sign into your account
+      <h1 className='large text-primary'>Sign In</h1>
+      <p className='lead'>
+        <i className='fas fa-user'></i> Sign into your account
       </p>
-      <form class='form' onSubmit={onSubmit}>
-        <div class='form-group'>
+      <form className='form' onSubmit={onSubmit}>
+        <div className='form-group'>
           <input
             type='email'
             name='email'
@@ -32,20 +32,20 @@ function Login() {
             placeholder='Email Address'
           />
         </div>
-        <div class='form-group'>
+        <div className='form-group'>
           <input
             type='password'
             name='password'
             value={password}
             onChange={onChange}
             placeholder='Password'
-            minlength='6'
+            minLength='6'
           />
         </div>
 
-        <input type='submit' value='Login' class='btn btn-primary' />
+        <input type='submit' value='Login' className='btn btn-primary' />
       </form>
-      <p class='my-1'>
+      <p className='my-1'>
         Don't have an account? <Link to='/register'>Sign Up</Link>
       </p>
     </>

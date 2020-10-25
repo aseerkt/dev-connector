@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setAlert } from '../../redux/actions/alert';
 import { Link } from 'react-router-dom';
 
 function Register() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,18 +18,19 @@ function Register() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (password !== password2) console.log('Passwords do not match');
+    if (password !== password2)
+      dispatch(setAlert('Passwords do not match', 'danger'));
     else console.log('success');
   };
 
   return (
     <>
-      <h1 class='large text-primary'>Sign Up</h1>
-      <p class='lead'>
-        <i class='fas fa-user'></i> Create your account
+      <h1 className='large text-primary'>Sign Up</h1>
+      <p className='lead'>
+        <i className='fas fa-user'></i> Create your account
       </p>
-      <form class='form' onSubmit={onSubmit}>
-        <div class='form-group'>
+      <form className='form' onSubmit={onSubmit}>
+        <div className='form-group'>
           <input
             type='text'
             placeholder='Name'
@@ -36,7 +40,7 @@ function Register() {
             required
           />
         </div>
-        <div class='form-group'>
+        <div className='form-group'>
           <input
             type='email'
             name='email'
@@ -44,34 +48,34 @@ function Register() {
             onChange={onChange}
             placeholder='Email Address'
           />
-          <small class='form-text'>
+          <small className='form-text'>
             This site uses Gravatar, so if you want a profile image, use a
             Gravatar email
           </small>
         </div>
-        <div class='form-group'>
+        <div className='form-group'>
           <input
             type='password'
             name='password'
             value={password}
             onChange={onChange}
             placeholder='Password'
-            minlength='6'
+            minLength='6'
           />
         </div>
-        <div class='form-group'>
+        <div className='form-group'>
           <input
             type='password'
             name='password2'
             value={password2}
             onChange={onChange}
             placeholder='Confirm Password'
-            minlength='6'
+            minLength='6'
           />
         </div>
-        <input type='submit' value='Register' class='btn btn-primary' />
+        <input type='submit' value='Register' className='btn btn-primary' />
       </form>
-      <p class='my-1'>
+      <p className='my-1'>
         Already have an account? <Link to='/login'>Sign In</Link>
       </p>
     </>
