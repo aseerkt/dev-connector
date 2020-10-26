@@ -60,7 +60,7 @@ router.post(
       user.password = await bcrypt.hash(user.password, salt);
 
       await user.save();
-      console.log(user.id);
+      // console.log(user.id);
 
       // Return JWT
       const payload = {
@@ -72,6 +72,7 @@ router.post(
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: '1h',
       });
+      console.log(token);
       return res.json({ token });
     } catch (err) {
       return res.status(500).json({ errors: [{ msg: 'Server Error' }] });

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAlert } from '../../redux/actions/alert';
-import { Link } from 'react-router-dom';
+import { register } from '../../redux/actions/auth';
+import { Link, Redirect } from 'react-router-dom';
 
 function Register() {
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,12 +18,18 @@ function Register() {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (password !== password2)
+    if (password !== password2) {
       dispatch(setAlert('Passwords do not match', 'danger'));
-    else console.log('success');
+    } else {
+      dispatch(register({ name, email, password }));
+    }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <>
@@ -37,7 +45,6 @@ function Register() {
             name='name'
             value={name}
             onChange={onChange}
-            required
           />
         </div>
         <div className='form-group'>
@@ -47,6 +54,7 @@ function Register() {
             value={email}
             onChange={onChange}
             placeholder='Email Address'
+            autoComplete='username'
           />
           <small className='form-text'>
             This site uses Gravatar, so if you want a profile image, use a
@@ -60,7 +68,7 @@ function Register() {
             value={password}
             onChange={onChange}
             placeholder='Password'
-            minLength='6'
+            autoComplete='new-password'
           />
         </div>
         <div className='form-group'>
@@ -70,7 +78,7 @@ function Register() {
             value={password2}
             onChange={onChange}
             placeholder='Confirm Password'
-            minLength='6'
+            autoComplete='new-password'
           />
         </div>
         <input type='submit' value='Register' className='btn btn-primary' />

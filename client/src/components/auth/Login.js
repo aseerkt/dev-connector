@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { login } from '../../redux/actions/auth';
 
 function Login() {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -13,8 +17,12 @@ function Login() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('success');
+    dispatch(login(email, password));
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <>
@@ -30,6 +38,7 @@ function Login() {
             value={email}
             onChange={onChange}
             placeholder='Email Address'
+            autoComplete='username'
           />
         </div>
         <div className='form-group'>
@@ -40,6 +49,7 @@ function Login() {
             onChange={onChange}
             placeholder='Password'
             minLength='6'
+            autoComplete='new-password'
           />
         </div>
 

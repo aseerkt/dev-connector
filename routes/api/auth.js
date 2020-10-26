@@ -11,7 +11,9 @@ const User = require('../../models/User');
 // @access  Public
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.user.id }).select('-password');
+    const user = await User.findOne({ _id: req.user.id }).select(
+      '-password -createdAt -updatedAt'
+    );
     return res.json(user);
   } catch (err) {
     console.error(err);
