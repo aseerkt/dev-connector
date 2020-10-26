@@ -3,6 +3,7 @@ import setAuthToken from '../../utils/setAuthToken';
 import { setAlert } from './alert';
 import {
   AUTH_ERROR,
+  CLEAR_PROFILE,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
@@ -59,7 +60,8 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 // Logout User
-export const logout = () => {
+export const logout = () => (dispatch) => {
   console.log('reached');
-  return { type: LOGOUT };
+  dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: LOGOUT });
 };

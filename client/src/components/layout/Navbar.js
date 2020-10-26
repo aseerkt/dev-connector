@@ -9,6 +9,12 @@ function Navbar() {
   const authLinks = (
     <ul>
       <li>
+        <Link to='/dashboard'>
+          <i className='fas fa-user'></i>{' '}
+          <span className='hide-sm'>Dashboard</span>
+        </Link>
+      </li>
+      <li>
         <a
           onClick={(e) => {
             console.log('clicked');
@@ -38,9 +44,9 @@ function Navbar() {
   return (
     <nav className='navbar bg-dark'>
       <h1>
-        <a href='dashboard.html'>
+        <Link to='/'>
           <i className='fas fa-code'></i> DevConnector{' '}
-        </a>
+        </Link>
       </h1>
       {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
     </nav>

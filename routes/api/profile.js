@@ -4,6 +4,7 @@ const axios = require('axios');
 const auth = require('../../middlewares/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 const router = express.Router();
 
@@ -145,9 +146,9 @@ router.get('/user/:user_id', async (req, res) => {
 // @access   Private
 router.delete('/', auth, async (req, res) => {
   try {
-    // @todo - Remove users posts
-
-    // Remove profile
+    // Remove user posts
+    await Post.deleteMany({ author: req.user.id });
+    // Remove user profile
     await Profile.deleteOne({ user: req.user.id });
     await User.deleteOne({ _id: req.user.id });
     res.json({ msg: 'User removed' });
